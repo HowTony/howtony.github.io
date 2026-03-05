@@ -389,6 +389,12 @@
             gap: 1.5rem;
         }
 
+        .project-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
         .project-card {
             background: var(--bg-card);
             border: 1px solid var(--border-subtle);
@@ -396,6 +402,7 @@
             overflow: hidden;
             transition: all 0.4s var(--ease-out-expo);
             position: relative;
+            cursor: pointer;
         }
 
         .project-card::before {
@@ -432,6 +439,17 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+        }
+
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s var(--ease-out-expo), opacity 0.3s;
+        }
+
+        .project-card:hover .project-thumb img {
+            transform: scale(1.05);
         }
 
         .project-thumb-icon {
@@ -822,181 +840,160 @@
         </div>
         <div class="projects-grid">
 
-            <!-- DEAD END (ZombieTrain) -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <div class="project-thumb-icon">🧟</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">DEAD END</h3>
-                    <p class="project-desc">
-                        Open-world survival game built 100% solo — featuring procedurally generated biomes,
-                        base building, resource gathering, and zombie horde defense on a moving train.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">Procedural Gen</span>
-                        <span class="project-tag violet">Multiplayer</span>
+            <!-- Upcoming Survival Game -->
+            <div class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <span class="project-badge">Coming Soon</span>
+                        <div class="project-thumb-icon">🚂</div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.roblox.com/games/122936572758029/DEAD-END" target="_blank" rel="noopener" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Play on Roblox
-                        </a>
+                    <div class="project-body">
+                        <h3 class="project-title">Untitled Survival Game</h3>
+                        <p class="project-desc">
+                            Open-world survival game built 100% solo — procedurally generated biomes,
+                            crafting, base building, enemy AI, and train-based exploration. Launching 2026.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">Procedural Gen</span>
+                            <span class="project-tag violet">AI Systems</span>
+                            <span class="project-tag violet">Solo Dev</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Upcoming Survival Game -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <span class="project-badge">Coming Soon</span>
-                    <div class="project-thumb-icon">🚂</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Untitled Survival Game</h3>
-                    <p class="project-desc">
-                        Open-world survival game built 100% solo — procedurally generated biomes,
-                        crafting, base building, enemy AI, and train-based exploration. Launching 2026.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">Procedural Gen</span>
-                        <span class="project-tag violet">AI Systems</span>
-                        <span class="project-tag violet">Solo Dev</span>
+            <!-- DEAD END -->
+            <a href="https://www.roblox.com/games/122936572758029/DEAD-END" target="_blank" rel="noopener" class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <img src="https://tr.rbxcdn.com/180DAY-e8c4724ade1ce12aea6e39cce0aa2f8b/512/512/Image/Png/noFilter" alt="DEAD END" loading="lazy">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">DEAD END</h3>
+                        <p class="project-desc">
+                            Open-world survival game built 100% solo — featuring procedurally generated biomes,
+                            base building, resource gathering, and zombie horde defense on a moving train.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">Procedural Gen</span>
+                            <span class="project-tag violet">Multiplayer</span>
+                            <span class="project-tag violet">Solo Dev</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- KATCH -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <div class="project-thumb-icon">🎯</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">KATCH</h3>
-                    <p class="project-desc">
-                        Fast-paced multiplayer game with competitive mechanics,
-                        real-time networking, and engaging gameplay loops.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">Multiplayer</span>
+            <a href="https://www.roblox.com/games/18894549437/KATCH" target="_blank" rel="noopener" class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <img src="https://tr.rbxcdn.com/180DAY-e7b2284622c84106463756835d115fc5/512/512/Image/Png/noFilter" alt="KATCH" loading="lazy">
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.roblox.com/games/18894549437/KATCH" target="_blank" rel="noopener" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Play on Roblox
-                        </a>
+                    <div class="project-body">
+                        <h3 class="project-title">KATCH</h3>
+                        <p class="project-desc">
+                            Fast-paced multiplayer game with competitive mechanics,
+                            real-time networking, and engaging gameplay loops.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">Multiplayer</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Gladiator Simulator -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <div class="project-thumb-icon">⚔️</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Gladiator Simulator</h3>
-                    <p class="project-desc">
-                        Arena combat simulator with progression systems, enemy AI,
-                        and upgrade mechanics for an engaging gladiator experience.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">Combat AI</span>
-                        <span class="project-tag violet">Progression</span>
+            <a href="https://www.roblox.com/games/14751111428/Gladiator-Simulator" target="_blank" rel="noopener" class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <img src="https://tr.rbxcdn.com/180DAY-a0c6c86cef682fec88d25c63595bd1eb/512/512/Image/Png/noFilter" alt="Gladiator Simulator" loading="lazy">
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.roblox.com/games/14751111428/Gladiator-Simulator" target="_blank" rel="noopener" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Play on Roblox
-                        </a>
+                    <div class="project-body">
+                        <h3 class="project-title">Gladiator Simulator</h3>
+                        <p class="project-desc">
+                            Arena combat simulator with progression systems, enemy AI,
+                            and upgrade mechanics for an engaging gladiator experience.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">Combat AI</span>
+                            <span class="project-tag violet">Progression</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Titan Simulator X -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <div class="project-thumb-icon">💪</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Titan Simulator X</h3>
-                    <p class="project-desc">
-                        Simulator experience with scaling progression, data persistence,
-                        and server-validated anti-exploit systems.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">Data Persistence</span>
+            <a href="https://www.roblox.com/games/13759253847/Titan-Simulator-X" target="_blank" rel="noopener" class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <img src="https://tr.rbxcdn.com/180DAY-9545c0ad55f8f8b6da5b56aba43c62a0/512/512/Image/Png/noFilter" alt="Titan Simulator X" loading="lazy">
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.roblox.com/games/13759253847/Titan-Simulator-X" target="_blank" rel="noopener" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Play on Roblox
-                        </a>
+                    <div class="project-body">
+                        <h3 class="project-title">Titan Simulator X</h3>
+                        <p class="project-desc">
+                            Simulator experience with scaling progression, data persistence,
+                            and server-validated anti-exploit systems.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">Data Persistence</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Titan Tycoon -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <div class="project-thumb-icon">🏗️</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Titan Tycoon</h3>
-                    <p class="project-desc">
-                        Tycoon game with building mechanics, data replication,
-                        anti-exploit validation, and real-time multiplayer systems.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">Tycoon</span>
-                        <span class="project-tag violet">Replication</span>
+            <a href="https://www.roblox.com/games/10463605438/Titan-Tycoon" target="_blank" rel="noopener" class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <img src="https://tr.rbxcdn.com/180DAY-8ac8f779a7f6c2e3276b7d841831e3a3/512/512/Image/Png/noFilter" alt="Titan Tycoon" loading="lazy">
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.roblox.com/games/10463605438/Titan-Tycoon" target="_blank" rel="noopener" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Play on Roblox
-                        </a>
+                    <div class="project-body">
+                        <h3 class="project-title">Titan Tycoon</h3>
+                        <p class="project-desc">
+                            Tycoon game with building mechanics, data replication,
+                            anti-exploit validation, and real-time multiplayer systems.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">Tycoon</span>
+                            <span class="project-tag violet">Replication</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Giant Simulator -->
-            <div class="project-card reveal">
-                <div class="project-thumb">
-                    <div class="project-thumb-icon">🗿</div>
-                </div>
-                <div class="project-body">
-                    <h3 class="project-title">Giant Simulator</h3>
-                    <p class="project-desc">
-                        Large-scale simulator with growth mechanics, competitive PvP,
-                        and robust server-authoritative gameplay systems.
-                    </p>
-                    <div class="project-tags">
-                        <span class="project-tag">Luau</span>
-                        <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">PvP</span>
-                        <span class="project-tag violet">Scaling Systems</span>
+            <a href="https://www.roblox.com/games/2986677229/Giant-Simulator" target="_blank" rel="noopener" class="project-card-link reveal">
+                <div class="project-card">
+                    <div class="project-thumb">
+                        <img src="https://tr.rbxcdn.com/180DAY-68ebd5fb7668b4538ea82f7a5a6ebf56/512/512/Image/Png/noFilter" alt="Giant Simulator" loading="lazy">
                     </div>
-                    <div class="project-links">
-                        <a href="https://www.roblox.com/games/2986677229/Giant-Simulator" target="_blank" rel="noopener" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Play on Roblox
-                        </a>
+                    <div class="project-body">
+                        <h3 class="project-title">Giant Simulator</h3>
+                        <p class="project-desc">
+                            Large-scale simulator with growth mechanics, competitive PvP,
+                            and robust server-authoritative gameplay systems.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Luau</span>
+                            <span class="project-tag">Roblox</span>
+                            <span class="project-tag violet">PvP</span>
+                            <span class="project-tag violet">Scaling Systems</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
 
         </div>
     </section>
