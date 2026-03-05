@@ -8,7 +8,7 @@
     <meta property="og:title" content="Tony Howarth — Game Developer">
     <meta property="og:description" content="Game Developer specializing in Roblox development, procedural generation, and multiplayer systems.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tonyhowarth.github.io">
+    <meta property="og:url" content="https://howtony.github.io">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -495,6 +495,22 @@
             color: var(--accent-violet);
         }
 
+        .project-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border-radius: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-violet));
+            color: var(--bg-deep);
+        }
+
         .project-links {
             display: flex;
             gap: 1rem;
@@ -806,15 +822,15 @@
         </div>
         <div class="projects-grid">
 
-            <!-- ZombieTrain -->
+            <!-- DEAD END (ZombieTrain) -->
             <div class="project-card reveal">
                 <div class="project-thumb">
                     <div class="project-thumb-icon">🧟</div>
                 </div>
                 <div class="project-body">
-                    <h3 class="project-title">ZombieTrain</h3>
+                    <h3 class="project-title">DEAD END</h3>
                     <p class="project-desc">
-                        Open-world Roblox survival game with procedurally generated biomes,
+                        Open-world survival game built 100% solo — featuring procedurally generated biomes,
                         base building, resource gathering, and zombie horde defense on a moving train.
                     </p>
                     <div class="project-tags">
@@ -824,63 +840,159 @@
                         <span class="project-tag violet">Multiplayer</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
+                        <a href="https://www.roblox.com/games/122936572758029/DEAD-END" target="_blank" rel="noopener" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             Play on Roblox
-                        </a>
-                        <a href="#" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            Source Code
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 2 -->
+            <!-- Upcoming Survival Game -->
+            <div class="project-card reveal">
+                <div class="project-thumb">
+                    <span class="project-badge">Coming Soon</span>
+                    <div class="project-thumb-icon">🚂</div>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">Untitled Survival Game</h3>
+                    <p class="project-desc">
+                        Open-world survival game built 100% solo — procedurally generated biomes,
+                        crafting, base building, enemy AI, and train-based exploration. Launching 2026.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Luau</span>
+                        <span class="project-tag">Roblox</span>
+                        <span class="project-tag violet">Procedural Gen</span>
+                        <span class="project-tag violet">AI Systems</span>
+                        <span class="project-tag violet">Solo Dev</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KATCH -->
+            <div class="project-card reveal">
+                <div class="project-thumb">
+                    <div class="project-thumb-icon">🎯</div>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">KATCH</h3>
+                    <p class="project-desc">
+                        Fast-paced multiplayer game with competitive mechanics,
+                        real-time networking, and engaging gameplay loops.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Luau</span>
+                        <span class="project-tag">Roblox</span>
+                        <span class="project-tag violet">Multiplayer</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.roblox.com/games/18894549437/KATCH" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Play on Roblox
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gladiator Simulator -->
             <div class="project-card reveal">
                 <div class="project-thumb">
                     <div class="project-thumb-icon">⚔️</div>
                 </div>
                 <div class="project-body">
-                    <h3 class="project-title">Dungeon Crawler RPG</h3>
+                    <h3 class="project-title">Gladiator Simulator</h3>
                     <p class="project-desc">
-                        Turn-based dungeon crawler with procedurally generated levels,
-                        enemy AI systems, and an inventory & loot system.
+                        Arena combat simulator with progression systems, enemy AI,
+                        and upgrade mechanics for an engaging gladiator experience.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">Luau</span>
                         <span class="project-tag">Roblox</span>
-                        <span class="project-tag violet">AI Pathfinding</span>
+                        <span class="project-tag violet">Combat AI</span>
+                        <span class="project-tag violet">Progression</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
+                        <a href="https://www.roblox.com/games/14751111428/Gladiator-Simulator" target="_blank" rel="noopener" class="project-link">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            Live Demo
+                            Play on Roblox
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 3 -->
+            <!-- Titan Simulator X -->
+            <div class="project-card reveal">
+                <div class="project-thumb">
+                    <div class="project-thumb-icon">💪</div>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">Titan Simulator X</h3>
+                    <p class="project-desc">
+                        Simulator experience with scaling progression, data persistence,
+                        and server-validated anti-exploit systems.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Luau</span>
+                        <span class="project-tag">Roblox</span>
+                        <span class="project-tag violet">Data Persistence</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.roblox.com/games/13759253847/Titan-Simulator-X" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Play on Roblox
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Titan Tycoon -->
             <div class="project-card reveal">
                 <div class="project-thumb">
                     <div class="project-thumb-icon">🏗️</div>
                 </div>
                 <div class="project-body">
-                    <h3 class="project-title">Tycoon Framework</h3>
+                    <h3 class="project-title">Titan Tycoon</h3>
                     <p class="project-desc">
-                        Modular tycoon game framework with data persistence,
-                        anti-exploit validation, and a real-time replication layer.
+                        Tycoon game with building mechanics, data replication,
+                        anti-exploit validation, and real-time multiplayer systems.
                     </p>
                     <div class="project-tags">
                         <span class="project-tag">Luau</span>
-                        <span class="project-tag">Knit</span>
-                        <span class="project-tag violet">Data Replication</span>
+                        <span class="project-tag">Roblox</span>
+                        <span class="project-tag violet">Tycoon</span>
+                        <span class="project-tag violet">Replication</span>
                     </div>
                     <div class="project-links">
-                        <a href="#" class="project-link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                            Source Code
+                        <a href="https://www.roblox.com/games/10463605438/Titan-Tycoon" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Play on Roblox
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Giant Simulator -->
+            <div class="project-card reveal">
+                <div class="project-thumb">
+                    <div class="project-thumb-icon">🗿</div>
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">Giant Simulator</h3>
+                    <p class="project-desc">
+                        Large-scale simulator with growth mechanics, competitive PvP,
+                        and robust server-authoritative gameplay systems.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Luau</span>
+                        <span class="project-tag">Roblox</span>
+                        <span class="project-tag violet">PvP</span>
+                        <span class="project-tag violet">Scaling Systems</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.roblox.com/games/2986677229/Giant-Simulator" target="_blank" rel="noopener" class="project-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            Play on Roblox
                         </a>
                     </div>
                 </div>
@@ -959,21 +1071,21 @@
                 or opportunities to be part of a team. Feel free to reach out!
             </p>
             <div class="contact-links">
-                <a href="mailto:your.email@example.com" class="contact-link">
+                <a href="mailto:pepatone@gmail.com" class="contact-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
                     Email
                 </a>
-                <a href="https://github.com/" target="_blank" rel="noopener" class="contact-link">
+                <a href="https://github.com/HowTony" target="_blank" rel="noopener" class="contact-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
                     GitHub
                 </a>
-                <a href="https://linkedin.com/" target="_blank" rel="noopener" class="contact-link">
+                <a href="https://www.linkedin.com/in/howtony/" target="_blank" rel="noopener" class="contact-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     LinkedIn
                 </a>
             </div>
 
-            <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+            <form class="contact-form" action="https://formspree.io/f/mwvrearr" method="POST">
                 <div class="form-group">
                     <label class="form-label" for="name">Name</label>
                     <input class="form-input" type="text" id="name" name="name" required placeholder="Your name">
