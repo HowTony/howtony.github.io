@@ -25,11 +25,11 @@
             --bg-surface: #0a0a14;
             --bg-card: #0f0f1c;
             --bg-card-hover: #14142a;
-            --border-subtle: rgba(255, 45, 138, 0.08);
-            --border-glow: rgba(255, 45, 138, 0.25);
+            --border-subtle: rgba(255, 107, 53, 0.08);
+            --border-glow: rgba(255, 107, 53, 0.25);
 
-            --accent: #ff2d8a;
-            --accent-dim: rgba(255, 45, 138, 0.15);
+            --accent: #ff6b35;
+            --accent-dim: rgba(255, 107, 53, 0.15);
             --accent-violet: #4dff6a;
             --accent-violet-dim: rgba(77, 255, 106, 0.12);
 
@@ -1496,7 +1496,7 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 if (this.hue === 330) {
-                    ctx.fillStyle = `rgba(255, 45, 138, ${this.opacity})`;
+                    ctx.fillStyle = `rgba(255, 107, 53, ${this.opacity})`;
                 } else {
                     ctx.fillStyle = `rgba(77, 255, 106, ${this.opacity})`;
                 }
@@ -1522,7 +1522,7 @@
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 45, 138, ${opacity})`;
+                        ctx.strokeStyle = `rgba(255, 107, 53, ${opacity})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
