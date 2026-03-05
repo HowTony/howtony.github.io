@@ -555,6 +555,161 @@
         }
 
         /* ═══════════════════════════════════════════
+           STATS BANNER
+           ═══════════════════════════════════════════ */
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 900px;
+            margin: -3rem auto 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        .stat-item {
+            background: var(--bg-card);
+            padding: 2rem 1rem;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .stat-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 600px) {
+            .stats-banner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ═══════════════════════════════════════════
+           EXPERIENCE TIMELINE
+           ═══════════════════════════════════════════ */
+        .timeline {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent-violet), var(--border-subtle));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--bg-deep);
+            transform: translateX(-5px);
+        }
+
+        .timeline-item:first-child .timeline-dot {
+            width: 14px;
+            height: 14px;
+            box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+            transform: translateX(-6px);
+        }
+
+        .timeline-date {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.35rem;
+        }
+
+        .timeline-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.35rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .timeline-highlight {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESUME BUTTON
+           ═══════════════════════════════════════════ */
+        .btn-resume {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-resume:hover {
+            background: var(--accent-dim);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-resume svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ═══════════════════════════════════════════
            SKILLS
            ═══════════════════════════════════════════ */
         .skills-grid {
@@ -804,6 +959,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -828,9 +984,35 @@
             <div class="hero-buttons">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
                 <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                <a href="resume.pdf" target="_blank" class="btn btn-resume">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Resume
+                </a>
             </div>
         </div>
     </section>
+
+    <!-- ════════════ STATS BANNER ════════════ -->
+    <div class="section" style="padding-bottom: 2rem;">
+        <div class="stats-banner reveal">
+            <div class="stat-item">
+                <div class="stat-number">200M+</div>
+                <div class="stat-label">Total Visits</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Games Shipped</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1.8M+</div>
+                <div class="stat-label">Community Members</div>
+            </div>
+        </div>
+    </div>
 
     <!-- ════════════ PROJECTS ════════════ -->
     <section class="section" id="projects">
@@ -1103,6 +1285,67 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- ════════════ EXPERIENCE ════════════ -->
+    <section class="section" id="experience">
+        <div class="section-header reveal">
+            <div class="section-label">Career</div>
+            <h2 class="section-title">Experience</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="timeline reveal">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2025 — Present</div>
+                <div class="timeline-title">DoomFrog Games — Founder & Solo Developer</div>
+                <div class="timeline-desc">
+                    Independent game studio. Currently developing an untitled open-world survival game
+                    with procedural generation, AI systems, and train-based exploration.
+                    Released <span class="timeline-highlight">DEAD END</span> as a 100% solo project.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2017 — 2025</div>
+                <div class="timeline-title">Mythral Games LLC — Co-Founder & Lead Client Engineer</div>
+                <div class="timeline-desc">
+                    Released 8 games with <span class="timeline-highlight">nearly 200 million combined visits</span>.
+                    Roles spanned technical design, application architecture, gameplay programming,
+                    UI/UX design, 3D modeling, and audio. Key releases include
+                    <span class="timeline-highlight">Giant Simulator</span> (161M+ visits),
+                    <span class="timeline-highlight">Space Mining Simulator</span> (12.4M+),
+                    and <span class="timeline-highlight">Gladiator Simulator</span> (6.4M+).
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2019</div>
+                <div class="timeline-title">Giant Simulator — 161M+ Visits</div>
+                <div class="timeline-desc">
+                    Flagship title under Mithril Games (1.8M community members).
+                    Built competitive PvP, growth mechanics, and server-authoritative systems at scale.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2018</div>
+                <div class="timeline-title">Space Mining Simulator — 12.4M+ Visits</div>
+                <div class="timeline-desc">
+                    Voxel-based space mining game with multiplayer resource trading,
+                    equipment upgrades, and procedural planet generation.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">~2016</div>
+                <div class="timeline-title">Started Game Development</div>
+                <div class="timeline-desc">
+                    Began learning Lua and Roblox Studio, building prototypes and
+                    developing core programming skills that would lead to a decade-long career.
+                </div>
+            </div>
         </div>
     </section>
 
