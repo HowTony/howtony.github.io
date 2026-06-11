@@ -17,7 +17,7 @@
     <meta name="twitter:title" content="Tony Howarth — Game Developer">
     <meta name="twitter:description" content="Game Developer specializing in Roblox development, procedural generation, and multiplayer systems.">
     <meta name="twitter:image" content="https://doomfrog.dev/og-image.png">
-    <meta name="theme-color" content="#05050b">
+    <meta name="theme-color" content="#050b07">
     <link rel="canonical" href="https://doomfrog.dev/">
     <script type="application/ld+json">
     {
@@ -39,7 +39,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════
            RESET & VARIABLES
@@ -47,22 +47,25 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-deep: #05050b;
-            --bg-surface: #0a0a14;
-            --bg-card: #0f0f1c;
-            --bg-card-hover: #14142a;
-            --border-subtle: rgba(255, 107, 53, 0.08);
-            --border-glow: rgba(255, 107, 53, 0.25);
+            /* Toxic Arcade — palette pulled from the DoomFrog logo:
+               acid green primary, hot magenta secondary, swamp-black base */
+            --bg-deep: #050b07;
+            --bg-surface: #07110a;
+            --bg-card: #0b160d;
+            --bg-card-hover: #102013;
+            --border-subtle: rgba(77, 255, 106, 0.09);
+            --border-glow: rgba(77, 255, 106, 0.28);
 
-            --accent: #ff6b35;
-            --accent-dim: rgba(255, 107, 53, 0.15);
-            --accent-green: #4dff6a;
-            --accent-green-dim: rgba(77, 255, 106, 0.12);
+            --accent: #4dff6a;
+            --accent-dim: rgba(77, 255, 106, 0.14);
+            --accent-2: #ff3d9e;
+            --accent-2-dim: rgba(255, 61, 158, 0.12);
 
-            --text-primary: #e4e4ec;
-            --text-secondary: #8888a0;
-            --text-muted: #7d7d96; /* >=4.5:1 on card backgrounds (WCAG AA) */
+            --text-primary: #e7efe8;
+            --text-secondary: #8fa194;
+            --text-muted: #7d9183; /* >=4.5:1 on card backgrounds (WCAG AA) */
 
+            --font-poster: 'Bungee', sans-serif;
             --font-display: 'Chakra Petch', sans-serif;
             --font-body: 'Outfit', sans-serif;
 
@@ -124,10 +127,10 @@
             z-index: -1;
             pointer-events: none;
             background:
-                radial-gradient(ellipse 50% 40% at 85% 10%, rgba(255, 107, 53, 0.055) 0%, transparent 70%),
-                radial-gradient(ellipse 45% 38% at 8% 88%, rgba(77, 255, 106, 0.045) 0%, transparent 70%),
-                repeating-linear-gradient(0deg, rgba(255, 107, 53, 0.02) 0 1px, transparent 1px 56px),
-                repeating-linear-gradient(90deg, rgba(255, 107, 53, 0.02) 0 1px, transparent 1px 56px);
+                radial-gradient(ellipse 50% 40% at 85% 10%, rgba(77, 255, 106, 0.055) 0%, transparent 70%),
+                radial-gradient(ellipse 45% 38% at 8% 88%, rgba(255, 61, 158, 0.04) 0%, transparent 70%),
+                repeating-linear-gradient(0deg, rgba(77, 255, 106, 0.02) 0 1px, transparent 1px 56px),
+                repeating-linear-gradient(90deg, rgba(77, 255, 106, 0.02) 0 1px, transparent 1px 56px);
         }
 
         /* ═══════════════════════════════════════════
@@ -263,8 +266,8 @@
             inset: 0;
             z-index: 1;
             background:
-                radial-gradient(ellipse 60% 50% at 50% 45%, rgba(255, 107, 53, 0.04) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 70% 60%, rgba(139, 92, 246, 0.03) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 50% 45%, rgba(77, 255, 106, 0.04) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 70% 60%, rgba(255, 61, 158, 0.03) 0%, transparent 60%),
                 linear-gradient(to bottom, transparent 70%, var(--bg-deep) 100%);
             pointer-events: none;
         }
@@ -298,7 +301,7 @@
             width: clamp(84px, 12vw, 136px);
             height: auto;
             margin-bottom: 1.25rem;
-            filter: drop-shadow(0 0 28px rgba(255, 107, 53, 0.35))
+            filter: drop-shadow(0 0 28px rgba(77, 255, 106, 0.35))
                     drop-shadow(0 0 60px rgba(77, 255, 106, 0.12));
             animation: hero-in 0.9s var(--ease-out-expo) forwards,
                        hero-float 6s ease-in-out 0.9s infinite;
@@ -357,13 +360,13 @@
         }
 
         .hero-name {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            font-weight: 700;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, #c0c0d8 50%, var(--accent) 100%);
+            font-family: var(--font-poster);
+            font-size: clamp(2.2rem, 6vw, 4.1rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: 0.01em;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, #c4dcc9 50%, var(--accent) 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -435,14 +438,14 @@
         .btn-primary {
             background: var(--accent);
             color: var(--bg-deep);
-            filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3));
+            filter: drop-shadow(0 0 10px rgba(77, 255, 106, 0.3));
         }
 
         .btn-primary::before { display: none; }
 
         .btn-primary:hover {
-            background: #ff8555;
-            filter: drop-shadow(0 0 18px rgba(255, 107, 53, 0.5));
+            background: #74ff8c;
+            filter: drop-shadow(0 0 18px rgba(77, 255, 106, 0.5));
             transform: translateY(-2px);
         }
 
@@ -458,7 +461,7 @@
         .btn-secondary:hover {
             background: var(--accent);
             color: var(--accent);
-            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.25));
+            filter: drop-shadow(0 0 12px rgba(77, 255, 106, 0.25));
             transform: translateY(-2px);
         }
 
@@ -471,9 +474,31 @@
             margin: 0 auto;
         }
 
+        /* Asymmetric headers: outlined poster index + left-aligned title.
+           .flip mirrors the header to the right for alternating rhythm. */
         .section-header {
-            text-align: center;
+            display: flex;
+            align-items: baseline;
+            gap: 1.25rem;
             margin-bottom: 4rem;
+        }
+
+        .section-header.flip {
+            flex-direction: row-reverse;
+            text-align: right;
+        }
+
+        .section-index {
+            font-family: var(--font-poster);
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 0.9;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--border-glow);
+            user-select: none;
+        }
+
+        .section-header.flip .section-divider {
+            margin-left: auto;
         }
 
         .section-label {
@@ -491,19 +516,70 @@
         .section-label::after { content: ' ]'; color: var(--text-muted); }
 
         .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 700;
-            letter-spacing: -0.01em;
+            font-family: var(--font-poster);
+            font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+            font-weight: 400;
+            letter-spacing: 0.01em;
             color: var(--text-primary);
         }
 
         .section-divider {
             width: 48px;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-green));
-            margin: 1.25rem auto 0;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            margin: 1.25rem 0 0;
             border-radius: 1px;
+        }
+
+        /* ═══════════════════════════════════════════
+           ANGLED BANDS — full-bleed slanted surfaces
+           ═══════════════════════════════════════════ */
+        .band {
+            background:
+                repeating-linear-gradient(135deg, transparent 0 26px, rgba(77, 255, 106, 0.016) 26px 28px),
+                linear-gradient(180deg, #081409 0%, var(--bg-surface) 100%);
+            clip-path: polygon(0 4rem, 100% 0, 100% calc(100% - 4rem), 0 100%);
+            padding: 2rem 0;
+        }
+
+        .band-reverse {
+            clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 calc(100% - 4rem));
+        }
+
+        /* ═══════════════════════════════════════════
+           MARQUEE TICKER
+           ═══════════════════════════════════════════ */
+        .ticker {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(77, 255, 106, 0.03);
+            padding: 0.7rem 0;
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 2.5rem;
+            width: max-content;
+            white-space: nowrap;
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            animation: ticker-scroll 38s linear infinite;
+        }
+
+        .ticker-track .tick-sep {
+            color: var(--accent);
+        }
+
+        @keyframes ticker-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
         }
 
         /* Reveal animations */
@@ -552,7 +628,7 @@
             inset: -1px;
             border-radius: 9px;
             padding: 1px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-green));
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -668,9 +744,9 @@
             color: var(--accent);
         }
 
-        .project-tag.green {
-            background: var(--accent-green-dim);
-            color: var(--accent-green);
+        .project-tag.alt {
+            background: var(--accent-2-dim);
+            color: var(--accent-2);
         }
 
         .project-badge {
@@ -685,7 +761,7 @@
             text-transform: uppercase;
             padding: 0.3rem 0.7rem;
             clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
-            background: linear-gradient(135deg, var(--accent), var(--accent-green));
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             color: var(--bg-deep);
         }
 
@@ -743,11 +819,11 @@
         }
 
         .stat-number {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: 700;
+            font-family: var(--font-poster);
+            font-size: clamp(1.15rem, 2.5vw, 1.8rem);
+            font-weight: 400;
             color: var(--accent);
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .stat-label {
@@ -780,7 +856,7 @@
             top: 8px;
             bottom: 8px;
             width: 2px;
-            background: linear-gradient(to bottom, var(--accent), var(--accent-green), var(--border-subtle));
+            background: linear-gradient(to bottom, var(--accent), var(--accent-2), var(--border-subtle));
         }
 
         .timeline-item {
@@ -807,14 +883,14 @@
         .timeline-item:first-child .timeline-dot {
             width: 14px;
             height: 14px;
-            box-shadow: 0 0 12px rgba(255, 107, 53, 0.4);
+            box-shadow: 0 0 12px rgba(77, 255, 106, 0.4);
             transform: translateX(-6px);
             animation: dot-pulse 2.6s ease-in-out infinite;
         }
 
         @keyframes dot-pulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 53, 0.35); }
-            50% { box-shadow: 0 0 22px rgba(255, 107, 53, 0.7); }
+            0%, 100% { box-shadow: 0 0 10px rgba(77, 255, 106, 0.35); }
+            50% { box-shadow: 0 0 22px rgba(77, 255, 106, 0.7); }
         }
 
         .timeline-date {
@@ -868,12 +944,12 @@
         }
 
         .btn-resume:hover {
-            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.25));
+            filter: drop-shadow(0 0 12px rgba(77, 255, 106, 0.25));
             transform: translateY(-2px);
         }
 
         .btn-resume:hover::before {
-            background: rgba(15, 10, 8, 0.92);
+            background: rgba(6, 15, 9, 0.92);
         }
 
         .btn-resume svg {
@@ -900,7 +976,7 @@
 
         .skill-category:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.06);
+            box-shadow: 0 8px 32px rgba(77, 255, 106, 0.06);
         }
 
         .skill-icon {
@@ -915,7 +991,7 @@
             background: var(--accent-dim);
         }
 
-        .skill-category:nth-child(2) .skill-icon { background: var(--accent-green-dim); }
+        .skill-category:nth-child(2) .skill-icon { background: var(--accent-2-dim); }
         .skill-category:nth-child(3) .skill-icon { background: rgba(251, 191, 36, 0.1); }
         .skill-category:nth-child(4) .skill-icon { background: rgba(52, 211, 153, 0.1); }
 
@@ -996,7 +1072,7 @@
             border-color: var(--accent);
             color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.1);
+            box-shadow: 0 8px 24px rgba(77, 255, 106, 0.1);
         }
 
         .contact-link svg {
@@ -1072,7 +1148,7 @@
 
         .form-status.success {
             display: block;
-            color: var(--accent-green);
+            color: var(--accent);
         }
 
         .form-status.error {
@@ -1093,7 +1169,7 @@
             width: 42px;
             height: 42px;
             margin-bottom: 0.6rem;
-            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.25));
+            filter: drop-shadow(0 0 12px rgba(77, 255, 106, 0.25));
         }
 
         .footer-brand {
@@ -1157,7 +1233,7 @@
 
         @media (max-width: 400px) {
             .hero-name {
-                font-size: 2.4rem;
+                font-size: 1.8rem;
             }
         }
 
@@ -1178,7 +1254,8 @@
                 animation: none;
             }
             .hero-scroll,
-            .timeline-item:first-child .timeline-dot {
+            .timeline-item:first-child .timeline-dot,
+            .ticker-track {
                 animation: none;
             }
             .project-thumb::before {
@@ -1234,6 +1311,20 @@
         <a href="#projects" class="hero-scroll" aria-label="Scroll to projects"></a>
     </section>
 
+    <!-- ════════════ TICKER ════════════ -->
+    <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+            <span>DoomFrog Games</span><span class="tick-sep">◆</span>
+            <span>200M+ Total Visits</span><span class="tick-sep">◆</span>
+            <span>11 Games Shipped</span><span class="tick-sep">◆</span>
+            <span>Bolts &amp; Bones — 2026</span><span class="tick-sep">◆</span>
+            <span>DoomFrog Games</span><span class="tick-sep">◆</span>
+            <span>200M+ Total Visits</span><span class="tick-sep">◆</span>
+            <span>11 Games Shipped</span><span class="tick-sep">◆</span>
+            <span>Bolts &amp; Bones — 2026</span><span class="tick-sep">◆</span>
+        </div>
+    </div>
+
     <!-- ════════════ STATS BANNER ════════════ -->
     <div class="section" style="padding-bottom: 2rem;">
         <div class="stats-banner reveal">
@@ -1259,9 +1350,12 @@
     <!-- ════════════ PROJECTS ════════════ -->
     <section class="section" id="projects">
         <div class="section-header reveal">
-            <div class="section-label">Portfolio</div>
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="section-divider"></div>
+            <span class="section-index" aria-hidden="true">01</span>
+            <div>
+                <div class="section-label">Portfolio</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-divider"></div>
+            </div>
         </div>
         <div class="projects-grid">
 
@@ -1281,9 +1375,9 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Procedural Gen</span>
-                            <span class="project-tag green">AI Systems</span>
-                            <span class="project-tag green">Solo Dev</span>
+                            <span class="project-tag alt">Procedural Gen</span>
+                            <span class="project-tag alt">AI Systems</span>
+                            <span class="project-tag alt">Solo Dev</span>
                         </div>
                     </div>
                 </div>
@@ -1304,9 +1398,9 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Procedural Gen</span>
-                            <span class="project-tag green">Multiplayer</span>
-                            <span class="project-tag green">Solo Dev</span>
+                            <span class="project-tag alt">Procedural Gen</span>
+                            <span class="project-tag alt">Multiplayer</span>
+                            <span class="project-tag alt">Solo Dev</span>
                         </div>
                     </div>
                 </div>
@@ -1327,7 +1421,7 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Multiplayer</span>
+                            <span class="project-tag alt">Multiplayer</span>
                         </div>
                     </div>
                 </div>
@@ -1348,8 +1442,8 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Combat AI</span>
-                            <span class="project-tag green">Progression</span>
+                            <span class="project-tag alt">Combat AI</span>
+                            <span class="project-tag alt">Progression</span>
                         </div>
                     </div>
                 </div>
@@ -1370,7 +1464,7 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Data Persistence</span>
+                            <span class="project-tag alt">Data Persistence</span>
                         </div>
                     </div>
                 </div>
@@ -1391,8 +1485,8 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Tycoon</span>
-                            <span class="project-tag green">Replication</span>
+                            <span class="project-tag alt">Tycoon</span>
+                            <span class="project-tag alt">Replication</span>
                         </div>
                     </div>
                 </div>
@@ -1413,8 +1507,8 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">PvP</span>
-                            <span class="project-tag green">Scaling Systems</span>
+                            <span class="project-tag alt">PvP</span>
+                            <span class="project-tag alt">Scaling Systems</span>
                         </div>
                     </div>
                 </div>
@@ -1435,8 +1529,8 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Roguelike</span>
-                            <span class="project-tag green">Progression</span>
+                            <span class="project-tag alt">Roguelike</span>
+                            <span class="project-tag alt">Progression</span>
                         </div>
                     </div>
                 </div>
@@ -1457,8 +1551,8 @@
                         <div class="project-tags">
                             <span class="project-tag">Luau</span>
                             <span class="project-tag">Roblox</span>
-                            <span class="project-tag green">Voxel</span>
-                            <span class="project-tag green">Multiplayer</span>
+                            <span class="project-tag alt">Voxel</span>
+                            <span class="project-tag alt">Multiplayer</span>
                         </div>
                     </div>
                 </div>
@@ -1468,11 +1562,15 @@
     </section>
 
     <!-- ════════════ SKILLS ════════════ -->
+    <div class="band">
     <section class="section" id="skills">
-        <div class="section-header reveal">
-            <div class="section-label">Expertise</div>
-            <h2 class="section-title">Skills & Tools</h2>
-            <div class="section-divider"></div>
+        <div class="section-header flip reveal">
+            <span class="section-index" aria-hidden="true">02</span>
+            <div>
+                <div class="section-label">Expertise</div>
+                <h2 class="section-title">Skills & Tools</h2>
+                <div class="section-divider"></div>
+            </div>
         </div>
         <div class="skills-grid">
 
@@ -1528,13 +1626,17 @@
 
         </div>
     </section>
+    </div>
 
     <!-- ════════════ EXPERIENCE ════════════ -->
     <section class="section" id="experience">
         <div class="section-header reveal">
-            <div class="section-label">Career</div>
-            <h2 class="section-title">Experience</h2>
-            <div class="section-divider"></div>
+            <span class="section-index" aria-hidden="true">03</span>
+            <div>
+                <div class="section-label">Career</div>
+                <h2 class="section-title">Experience</h2>
+                <div class="section-divider"></div>
+            </div>
         </div>
         <div class="timeline reveal">
             <div class="timeline-item">
@@ -1591,11 +1693,15 @@
     </section>
 
     <!-- ════════════ CONTACT ════════════ -->
+    <div class="band band-reverse">
     <section class="section" id="contact">
-        <div class="section-header reveal">
-            <div class="section-label">Get in Touch</div>
-            <h2 class="section-title">Contact</h2>
-            <div class="section-divider"></div>
+        <div class="section-header flip reveal">
+            <span class="section-index" aria-hidden="true">04</span>
+            <div>
+                <div class="section-label">Get in Touch</div>
+                <h2 class="section-title">Contact</h2>
+                <div class="section-divider"></div>
+            </div>
         </div>
         <div class="contact-wrapper reveal">
             <p class="contact-text">
@@ -1636,6 +1742,7 @@
             </form>
         </div>
     </section>
+    </div>
 
     <!-- ════════════ FOOTER ════════════ -->
     <footer class="footer">
@@ -1804,8 +1911,8 @@
                 this.speedX = (Math.random() - 0.5) * 0.3;
                 this.speedY = (Math.random() - 0.5) * 0.3;
                 this.opacity = Math.random() * 0.4 + 0.1;
-                /* 70% orange, 30% green — matches the accent palette */
-                this.rgb = Math.random() > 0.7 ? '77, 255, 106' : '255, 107, 53';
+                /* 70% acid green, 30% hot magenta — matches the accent palette */
+                this.rgb = Math.random() > 0.7 ? '255, 61, 158' : '77, 255, 106';
             }
 
             update() {
@@ -1834,10 +1941,10 @@
             }
 
             draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                /* Square "pixel dust" instead of round dots — fits the arcade theme */
                 ctx.fillStyle = `rgba(${this.rgb}, ${this.opacity})`;
-                ctx.fill();
+                const half = this.size;
+                ctx.fillRect(this.x - half, this.y - half, half * 2, half * 2);
             }
         }
 
@@ -1862,7 +1969,7 @@
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(255, 107, 53, ${opacity})`;
+                        ctx.strokeStyle = `rgba(77, 255, 106, ${opacity})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }

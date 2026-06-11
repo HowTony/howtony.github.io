@@ -10,7 +10,7 @@
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://doomfrog.dev/resume.html">
     <meta property="og:image" content="https://doomfrog.dev/og-image.png">
-    <meta name="theme-color" content="#05050b">
+    <meta name="theme-color" content="#050b07">
     <link rel="canonical" href="https://doomfrog.dev/resume.html">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -25,16 +25,17 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-deep: #05050b;
-            --bg-surface: #0a0a14;
-            --bg-card: #0f0f1c;
-            --border-subtle: rgba(255, 107, 53, 0.08);
-            --border-glow: rgba(255, 107, 53, 0.25);
-            --accent: #ff6b35;
-            --accent-dim: rgba(255, 107, 53, 0.15);
-            --text-primary: #e4e4ec;
-            --text-secondary: #8888a0;
-            --text-muted: #7d7d96; /* >=4.5:1 on card backgrounds (WCAG AA) */
+            /* Toxic Arcade palette — matches index.html */
+            --bg-deep: #050b07;
+            --bg-surface: #07110a;
+            --bg-card: #0b160d;
+            --border-subtle: rgba(77, 255, 106, 0.09);
+            --border-glow: rgba(77, 255, 106, 0.28);
+            --accent: #4dff6a;
+            --accent-dim: rgba(77, 255, 106, 0.14);
+            --text-primary: #e7efe8;
+            --text-secondary: #8fa194;
+            --text-muted: #7d9183; /* >=4.5:1 on card backgrounds (WCAG AA) */
             --font-display: 'Chakra Petch', sans-serif;
             --font-body: 'Outfit', sans-serif;
         }
@@ -110,7 +111,7 @@
         }
         .btn-print:hover {
             background: var(--accent-dim);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.1);
+            box-shadow: 0 0 20px rgba(77, 255, 106, 0.1);
         }
         .btn-print svg { width: 15px; height: 15px; }
 
@@ -292,7 +293,7 @@
         }
         .project-card:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.04);
+            box-shadow: 0 0 20px rgba(77, 255, 106, 0.04);
         }
 
         .project-name {
