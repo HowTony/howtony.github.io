@@ -61,7 +61,7 @@
 
             --text-primary: #e4e4ec;
             --text-secondary: #8888a0;
-            --text-muted: #55556a;
+            --text-muted: #7d7d96; /* >=4.5:1 on card backgrounds (WCAG AA) */
 
             --font-display: 'Chakra Petch', sans-serif;
             --font-body: 'Outfit', sans-serif;
@@ -974,7 +974,23 @@
                 font-size: 2.4rem;
             }
         }
+
+        /* ═══════════════════════════════════════════
+           REDUCED MOTION
+           ═══════════════════════════════════════════ */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .hero-name { animation: none; }
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
     </style>
+    <noscript>
+        <style>.reveal { opacity: 1; transform: none; }</style>
+    </noscript>
 </head>
 <body>
 
@@ -988,7 +1004,7 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -996,7 +1012,7 @@
 
     <!-- ════════════ HERO ════════════ -->
     <section class="hero" id="hero">
-        <canvas class="hero-canvas" id="heroCanvas"></canvas>
+        <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
         <div class="hero-gradient"></div>
         <div class="hero-content">
             <div class="hero-tag">Game Developer</div>
@@ -1436,14 +1452,16 @@
         }, { passive: true });
 
         navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('open');
-            navLinks.classList.toggle('open');
+            const open = navToggle.classList.toggle('open');
+            navLinks.classList.toggle('open', open);
+            navToggle.setAttribute('aria-expanded', open);
         });
 
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('open');
                 navLinks.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
             });
         });
 
@@ -1565,28 +1583,36 @@
             animId = requestAnimationFrame(animate);
         }
 
-        animate();
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        /* Track mouse for particle interaction */
-        document.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        }, { passive: true });
+        if (prefersReducedMotion) {
+            /* Single static frame — no animation loop, no mouse tracking */
+            particles.forEach(p => p.draw());
+            drawConnections();
+        } else {
+            animate();
 
-        /* Pause animation when hero is not visible */
-        const heroSection = document.getElementById('hero');
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (!animId) animate();
-                } else {
-                    cancelAnimationFrame(animId);
-                    animId = null;
-                }
-            });
-        }, { threshold: 0 });
+            /* Track mouse for particle interaction */
+            document.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            }, { passive: true });
 
-        heroObserver.observe(heroSection);
+            /* Pause animation when hero is not visible */
+            const heroSection = document.getElementById('hero');
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!animId) animate();
+                    } else {
+                        cancelAnimationFrame(animId);
+                        animId = null;
+                    }
+                });
+            }, { threshold: 0 });
+
+            heroObserver.observe(heroSection);
+        }
     </script>
 </body>
 </html>
