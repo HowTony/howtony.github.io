@@ -88,6 +88,10 @@
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            /* Stacking context so the fixed atmosphere layer (z -1) sits above
+               the body background but below all content */
+            position: relative;
+            z-index: 0;
         }
 
         ::selection {
@@ -108,6 +112,22 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 256px 256px;
+        }
+
+        /* ═══════════════════════════════════════════
+           ATMOSPHERE — faint HUD grid + ambient glow
+           ═══════════════════════════════════════════ */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 50% 40% at 85% 10%, rgba(255, 107, 53, 0.055) 0%, transparent 70%),
+                radial-gradient(ellipse 45% 38% at 8% 88%, rgba(77, 255, 106, 0.045) 0%, transparent 70%),
+                repeating-linear-gradient(0deg, rgba(255, 107, 53, 0.02) 0 1px, transparent 1px 56px),
+                repeating-linear-gradient(90deg, rgba(255, 107, 53, 0.02) 0 1px, transparent 1px 56px);
         }
 
         /* ═══════════════════════════════════════════
@@ -146,6 +166,19 @@
             color: var(--text-primary);
             text-decoration: none;
             letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .nav-logo img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.4s var(--ease-spring);
+        }
+
+        .nav-logo:hover img {
+            transform: rotate(-12deg) scale(1.1);
         }
 
         .nav-logo span {
@@ -244,6 +277,60 @@
             max-width: 800px;
         }
 
+        /* Orchestrated load: hero children fade up in sequence */
+        .hero-content > * {
+            opacity: 0;
+            animation: hero-in 0.9s var(--ease-out-expo) forwards;
+        }
+
+        .hero-content > *:nth-child(2) { animation-delay: 0.08s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.16s; }
+        .hero-content > *:nth-child(4) { animation-delay: 0.24s; }
+        .hero-content > *:nth-child(5) { animation-delay: 0.32s; }
+        .hero-content > *:nth-child(6) { animation-delay: 0.4s; }
+
+        @keyframes hero-in {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-logo {
+            width: clamp(84px, 12vw, 136px);
+            height: auto;
+            margin-bottom: 1.25rem;
+            filter: drop-shadow(0 0 28px rgba(255, 107, 53, 0.35))
+                    drop-shadow(0 0 60px rgba(77, 255, 106, 0.12));
+            animation: hero-in 0.9s var(--ease-out-expo) forwards,
+                       hero-float 6s ease-in-out 0.9s infinite;
+        }
+
+        @keyframes hero-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-9px); }
+        }
+
+        @media (max-height: 700px) {
+            .hero-logo { display: none; }
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.25rem;
+            left: 50%;
+            z-index: 2;
+            width: 22px;
+            height: 22px;
+            border-right: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+            opacity: 0.5;
+            animation: scroll-bob 2.2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-bob {
+            0%, 100% { transform: translate(-50%, 0) rotate(45deg); opacity: 0.4; }
+            50% { transform: translate(-50%, 9px) rotate(45deg); opacity: 0.85; }
+        }
+
         .hero-tag {
             font-family: var(--font-display);
             font-size: 0.8rem;
@@ -281,7 +368,10 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shimmer 8s ease-in-out infinite;
+            /* hero-in must be restated here: this shorthand replaces the
+               .hero-content > * animation, which would leave opacity stuck at 0 */
+            animation: hero-in 0.9s var(--ease-out-expo) 0.16s forwards,
+                       shimmer 8s ease-in-out infinite;
         }
 
         @keyframes shimmer {
@@ -313,6 +403,10 @@
             flex-wrap: wrap;
         }
 
+        /* HUD buttons: cut corners via clip-path. Glow uses drop-shadow so it
+           follows the cut shape (box-shadow would be clipped). Outlined buttons
+           fake their border with a parent-background + inset ::before layer,
+           because a real border can't follow the clipped diagonal. */
         .btn {
             font-family: var(--font-display);
             font-size: 0.9rem;
@@ -320,37 +414,51 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             padding: 0.9rem 2rem;
-            border-radius: 4px;
+            clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s var(--ease-out-expo);
             position: relative;
-            overflow: hidden;
+            z-index: 0;
+            border: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            z-index: -1;
+            clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 13px 100%, 0 calc(100% - 13px));
+            transition: background 0.3s var(--ease-out-expo);
         }
 
         .btn-primary {
             background: var(--accent);
             color: var(--bg-deep);
-            border: 1px solid var(--accent);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+            filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3));
         }
+
+        .btn-primary::before { display: none; }
 
         .btn-primary:hover {
             background: #ff8555;
-            box-shadow: 0 0 40px rgba(255, 107, 53, 0.3);
+            filter: drop-shadow(0 0 18px rgba(255, 107, 53, 0.5));
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: var(--border-glow);
             color: var(--text-primary);
-            border: 1px solid var(--border-glow);
+        }
+
+        .btn-secondary::before {
+            background: var(--bg-deep);
         }
 
         .btn-secondary:hover {
-            border-color: var(--accent);
+            background: var(--accent);
             color: var(--accent);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.1);
+            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.25));
             transform: translateY(-2px);
         }
 
@@ -377,6 +485,10 @@
             color: var(--accent);
             margin-bottom: 0.75rem;
         }
+
+        /* HUD-style brackets around section labels */
+        .section-label::before { content: '[ '; color: var(--text-muted); }
+        .section-label::after { content: ' ]'; color: var(--text-muted); }
 
         .section-title {
             font-family: var(--font-display);
@@ -419,6 +531,7 @@
             text-decoration: none;
             color: inherit;
             display: block;
+            perspective: 900px;
         }
 
         .project-card {
@@ -426,7 +539,9 @@
             border: 1px solid var(--border-subtle);
             border-radius: 8px;
             overflow: hidden;
-            transition: all 0.4s var(--ease-out-expo);
+            transition: background 0.4s var(--ease-out-expo),
+                        box-shadow 0.4s var(--ease-out-expo),
+                        transform 0.15s ease-out;
             position: relative;
             cursor: pointer;
         }
@@ -496,6 +611,25 @@
             background: linear-gradient(to bottom, transparent 50%, var(--bg-card) 100%);
         }
 
+        /* Shine sweep across the thumbnail on hover */
+        .project-thumb::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -75%;
+            width: 50%;
+            z-index: 1;
+            background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.7s var(--ease-out-expo);
+            pointer-events: none;
+        }
+
+        .project-card:hover .project-thumb::before {
+            left: 125%;
+        }
+
         .project-body {
             padding: 1.5rem;
         }
@@ -529,7 +663,7 @@
             letter-spacing: 0.06em;
             text-transform: uppercase;
             padding: 0.3rem 0.65rem;
-            border-radius: 3px;
+            clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
             background: var(--accent-dim);
             color: var(--accent);
         }
@@ -550,7 +684,7 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             padding: 0.3rem 0.7rem;
-            border-radius: 3px;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
             background: linear-gradient(135deg, var(--accent), var(--accent-green));
             color: var(--bg-deep);
         }
@@ -675,6 +809,12 @@
             height: 14px;
             box-shadow: 0 0 12px rgba(255, 107, 53, 0.4);
             transform: translateX(-6px);
+            animation: dot-pulse 2.6s ease-in-out infinite;
+        }
+
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 53, 0.35); }
+            50% { box-shadow: 0 0 22px rgba(255, 107, 53, 0.7); }
         }
 
         .timeline-date {
@@ -716,18 +856,24 @@
            RESUME BUTTON
            ═══════════════════════════════════════════ */
         .btn-resume {
-            background: transparent;
+            background: var(--accent);
             color: var(--accent);
-            border: 1px solid var(--accent);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        .btn-resume::before {
+            background: var(--bg-deep);
+        }
+
         .btn-resume:hover {
-            background: var(--accent-dim);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.25));
             transform: translateY(-2px);
+        }
+
+        .btn-resume:hover::before {
+            background: rgba(15, 10, 8, 0.92);
         }
 
         .btn-resume svg {
@@ -939,8 +1085,25 @@
            ═══════════════════════════════════════════ */
         .footer {
             border-top: 1px solid var(--border-subtle);
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
+        }
+
+        .footer-logo {
+            width: 42px;
+            height: 42px;
+            margin-bottom: 0.6rem;
+            filter: drop-shadow(0 0 12px rgba(255, 107, 53, 0.25));
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
         }
 
         .footer-text {
@@ -1009,6 +1172,18 @@
                 transform: none;
                 transition: none;
             }
+            .hero-content > *,
+            .hero-logo {
+                opacity: 1;
+                animation: none;
+            }
+            .hero-scroll,
+            .timeline-item:first-child .timeline-dot {
+                animation: none;
+            }
+            .project-thumb::before {
+                display: none;
+            }
         }
     </style>
     <noscript>
@@ -1020,7 +1195,7 @@
     <!-- ════════════ NAVIGATION ════════════ -->
     <nav class="nav" id="nav">
         <div class="nav-inner">
-            <a href="#" class="nav-logo">TH<span>.</span></a>
+            <a href="#" class="nav-logo"><img src="logo-64.webp" alt="" width="64" height="64">TH<span>.</span></a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -1038,6 +1213,7 @@
         <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
         <div class="hero-gradient"></div>
         <div class="hero-content">
+            <img src="logo-320.webp" alt="" class="hero-logo" width="320" height="320">
             <div class="hero-tag">Game Developer</div>
             <h1 class="hero-name">Tony Howarth</h1>
             <p class="hero-title">Software Engineer / Game Developer / UI Engineer</p>
@@ -1055,6 +1231,7 @@
                 </a>
             </div>
         </div>
+        <a href="#projects" class="hero-scroll" aria-label="Scroll to projects"></a>
     </section>
 
     <!-- ════════════ STATS BANNER ════════════ -->
@@ -1462,11 +1639,15 @@
 
     <!-- ════════════ FOOTER ════════════ -->
     <footer class="footer">
+        <img src="logo-64.webp" alt="" class="footer-logo" width="64" height="64">
+        <p class="footer-brand">DoomFrog Games</p>
         <p class="footer-text">&copy; 2026 Tony Howarth. Built with purpose.</p>
     </footer>
 
     <!-- ════════════ SCRIPTS ════════════ -->
     <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
         /* ─── Nav scroll effect ─── */
         const nav = document.getElementById('nav');
         const navToggle = document.getElementById('navToggle');
@@ -1504,6 +1685,58 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
         reveals.forEach(el => revealObserver.observe(el));
+
+        /* ─── Stat count-up on first view ─── */
+        function animateCount(el) {
+            const match = el.textContent.trim().match(/^([\d.]+)(.*)$/);
+            if (!match) return;
+            const target = parseFloat(match[1]);
+            const suffix = match[2];
+            const decimals = (match[1].split('.')[1] || '').length;
+            const duration = 1400;
+            const start = performance.now();
+            function tick(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = (target * eased).toFixed(decimals) + suffix;
+                if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+
+        if (!prefersReducedMotion) {
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCount(entry.target);
+                        statObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
+        }
+
+        /* ─── 3D tilt on project cards (mouse only) ─── */
+        const canTilt = !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        if (canTilt) {
+            document.querySelectorAll('.project-card-link').forEach(link => {
+                const card = link.querySelector('.project-card');
+
+                link.addEventListener('pointermove', (e) => {
+                    const rect = link.getBoundingClientRect();
+                    const px = (e.clientX - rect.left) / rect.width - 0.5;
+                    const py = (e.clientY - rect.top) / rect.height - 0.5;
+                    card.style.transform =
+                        `translateY(-4px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 7).toFixed(2)}deg)`;
+                });
+
+                link.addEventListener('pointerleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
 
         /* ─── Contact form (AJAX submit, inline status) ─── */
         const contactForm = document.getElementById('contactForm');
@@ -1646,8 +1879,6 @@
             drawConnections();
             animId = requestAnimationFrame(animate);
         }
-
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (prefersReducedMotion) {
             /* Single static frame — no animation loop, no mouse tracking */
