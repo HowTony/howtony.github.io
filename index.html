@@ -911,6 +911,29 @@
             margin-top: 0.5rem;
         }
 
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: default;
+            transform: none;
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            color: var(--accent-violet);
+        }
+
+        .form-status.error {
+            display: block;
+            color: var(--accent);
+        }
+
         /* ═══════════════════════════════════════════
            FOOTER
            ═══════════════════════════════════════════ */
@@ -1417,7 +1440,8 @@
                 </a>
             </div>
 
-            <form class="contact-form" action="https://formspree.io/f/mwvrearr" method="POST">
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/mwvrearr" method="POST">
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px;">
                 <div class="form-group">
                     <label class="form-label" for="name">Name</label>
                     <input class="form-input" type="text" id="name" name="name" required placeholder="Your name">
@@ -1431,6 +1455,7 @@
                     <textarea class="form-textarea" id="message" name="message" required placeholder="Tell me about your project or opportunity..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+                <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
             </form>
         </div>
     </section>
@@ -1479,6 +1504,36 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
         reveals.forEach(el => revealObserver.observe(el));
+
+        /* ─── Contact form (AJAX submit, inline status) ─── */
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+            formStatus.className = 'form-status';
+
+            try {
+                const res = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!res.ok) throw new Error('Formspree responded ' + res.status);
+                contactForm.reset();
+                formStatus.textContent = "Message sent — I'll get back to you soon.";
+                formStatus.classList.add('success');
+            } catch (err) {
+                formStatus.textContent = 'Something went wrong — email me directly at thowarthdev@gmail.com.';
+                formStatus.classList.add('error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            }
+        });
 
         /* ─── Hero particle canvas ─── */
         const canvas = document.getElementById('heroCanvas');
