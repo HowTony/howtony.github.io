@@ -68,7 +68,7 @@ if (carousel) {
 
 const ravenCanvas = document.getElementById("ravens");
 
-if (ravenCanvas) {
+if (ravenCanvas && !ravenCanvas.hidden) {
   const context = ravenCanvas.getContext("2d");
   const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const flock = [];
