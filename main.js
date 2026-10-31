@@ -75,9 +75,9 @@ if (ravensBack && ravensFront) {
   const FLOCK = 7;
   const KEEP_X = 2130 / 2560;
   const KEEP_Y = 590 / 1439;
-  const SKY_LIMIT = 0.42;
+  const SKY_LIMIT = 0.66;
   const FRAME_MS = 33;
-  const SCOUT_SPEED = 62;
+  const SCOUT_SPEED = 230;
   const layers = [ravensBack, ravensFront].map((canvas) => ({ canvas, context: canvas.getContext("2d") }));
   const plate = document.querySelector(".decree__plate");
   const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -171,17 +171,17 @@ if (ravensBack && ravensFront) {
 
   function steer(raven, step) {
     raven.sway += step * 0.5;
-    const goalX = pointerX + Math.cos(raven.sway + raven.offset) * width * 0.09;
-    const goalY = Math.min(pointerY, height * SKY_LIMIT) + Math.sin(raven.sway * 1.3 + raven.offset) * height * 0.05;
-    raven.moveX += (goalX - raven.x) * step * 0.14;
-    raven.moveY += (goalY - raven.y) * step * 0.14;
+    const goalX = pointerX + Math.cos(raven.sway * 2 + raven.offset) * 46;
+    const goalY = Math.min(pointerY, height * SKY_LIMIT) + Math.sin(raven.sway * 2.6 + raven.offset) * 28;
+    raven.moveX += (goalX - raven.x) * step * 1.1;
+    raven.moveY += (goalY - raven.y) * step * 1.1;
     const speed = Math.hypot(raven.moveX, raven.moveY);
     if (speed > SCOUT_SPEED) {
       raven.moveX *= SCOUT_SPEED / speed;
       raven.moveY *= SCOUT_SPEED / speed;
     }
-    raven.moveX *= 1 - step * 0.35;
-    raven.moveY *= 1 - step * 0.35;
+    raven.moveX *= 1 - step * 1.1;
+    raven.moveY *= 1 - step * 1.1;
     raven.x += raven.moveX * step;
     raven.y += raven.moveY * step;
     if (Math.abs(raven.moveX) > 3) raven.facing = raven.moveX > 0 ? 1 : -1;
@@ -203,7 +203,7 @@ if (ravensBack && ravensFront) {
   function paint() {
     layers.forEach(({ context }) => context.clearRect(0, 0, width, height));
     flock.forEach(draw);
-    scouts.forEach((raven) => sprite(raven, 0, raven.x, raven.y, 15 + unit * 8, 0.55, raven.facing));
+    scouts.forEach((raven) => sprite(raven, 0, raven.x, raven.y, 18 + unit * 10, 0.8, raven.facing));
   }
 
   function frame(now) {
@@ -227,7 +227,7 @@ if (ravensBack && ravensFront) {
       pointerX = width * 0.4;
       pointerY = height * 0.2;
       for (let i = 0; i < 3; i += 1) scouts.push(scout(i));
-      document.querySelector(".decree").addEventListener("pointermove", (event) => {
+      addEventListener("pointermove", (event) => {
         pointerX = event.clientX;
         pointerY = event.clientY + scrollY;
       }, { passive: true });
