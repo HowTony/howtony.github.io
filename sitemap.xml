@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://doomfrog.dev/</loc>
-    </url>
-    <url>
-        <loc>https://doomfrog.dev/resume.html</loc>
-    </url>
+  <url><loc>https://doomfrog.dev/</loc></url>
+  <url><loc>https://doomfrog.dev/world.html</loc></url>
+  <url><loc>https://doomfrog.dev/races.html</loc></url>
+  <url><loc>https://doomfrog.dev/skills.html</loc></url>
+  <url><loc>https://doomfrog.dev/magic.html</loc></url>
 </urlset>

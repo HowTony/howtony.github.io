@@ -1,84 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Tony Howarth</title>
-    <meta name="robots" content="noindex">
-    <meta name="theme-color" content="#050b07">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Chakra+Petch:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg-deep: #050b07;
-            --accent: #4dff6a;
-            --accent-dim: rgba(77, 255, 106, 0.14);
-            --border-glow: rgba(77, 255, 106, 0.28);
-            --text-primary: #e7efe8;
-            --text-secondary: #8fa194;
-            --font-poster: 'Bungee', sans-serif;
-            --font-display: 'Chakra Petch', sans-serif;
-            --font-body: 'Outfit', sans-serif;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background: var(--bg-deep);
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .code {
-            font-family: var(--font-poster);
-            font-size: clamp(4rem, 15vw, 7.5rem);
-            font-weight: 400;
-            line-height: 1;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .message {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            margin: 1rem 0 2.5rem;
-        }
-
-        .btn-home {
-            font-family: var(--font-display);
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.9rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            color: var(--accent);
-            border: 1px solid var(--border-glow);
-            transition: background 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-home:hover {
-            background: var(--accent-dim);
-            box-shadow: 0 0 20px rgba(77, 255, 106, 0.15);
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Ravenmarch</title>
+<meta name="description" content="No classes. Nine stats, 60 skills, and two permanent specialisations.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#151210">
+<link rel="icon" href="assets/art/emblem.png" type="image/png">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main>
-        <div class="code">404</div>
-        <p class="message">This page wandered off the map. Nothing procedurally generated here.</p>
-        <a href="/" class="btn-home">Back to Home</a>
-    </main>
+<header class="bar">
+  <a class="bar__name" href="index.html">Ravenmarch</a>
+  <nav aria-label="Main">
+    <a href="world.html">World</a>
+    <a href="races.html">Races</a>
+    <a href="skills.html">Skills</a>
+    <a href="magic.html">Magic</a>
+  </nav>
+  <a class="bar__news" href="index.html#news">Get updates</a>
+</header>
+<main class="page">
+  <div class="page__head">
+    <h1>Off the map</h1>
+    <p>This page doesn't exist. <a href="index.html">Head back to the Ravenmarch</a>.</p>
+  </div>
+</main>
+<footer>
+  <p>Ravenmarch: Oath and Iron is a working title. Made by DoomFrog.</p>
+</footer>
+<script src="main.js" defer></script>
 </body>
 </html>

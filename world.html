@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The World | Ravenmarch: Oath and Iron</title>
+<meta name="description" content="A realm under an NPC Crown, with wild land held by guild charter and kept by iron.">
+<link rel="canonical" href="https://doomfrog.dev/world.html">
+<meta property="og:title" content="The World | Ravenmarch: Oath and Iron">
+<meta property="og:description" content="A realm under an NPC Crown, with wild land held by guild charter and kept by iron.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://doomfrog.dev/world.html">
+<meta property="og:image" content="https://doomfrog.dev/assets/art/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#151210">
+<link rel="icon" href="assets/art/emblem.png" type="image/png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="bar">
+  <a class="bar__name" href="index.html">Ravenmarch</a>
+  <nav aria-label="Main">
+    <a href="world.html" aria-current="page">World</a>
+    <a href="races.html">Races</a>
+    <a href="skills.html">Skills</a>
+    <a href="magic.html">Magic</a>
+  </nav>
+  <a class="bar__news" href="index.html#news">Get updates</a>
+</header>
+<main class="page page--world">
+  <div class="page__head">
+    <h1>The Crown holds the heart. The edges are yours to take.</h1>
+  </div>
+  <figure class="vista vista--page">
+    <img src="assets/art/crownlands.webp" width="2172" height="724" alt="A walled town beside a river and stone bridge at dusk, with farmland on the far bank.">
+    <figcaption>A Crownlands town. AI-assisted concept art, not in-game.</figcaption>
+  </figure>
+  <section class="realm">
+    <div class="realm__words">
+      
+      <p>The Ravenmarch is one realm under an NPC Crown that no player can overthrow. It keeps the heartland safe but can't hold the wild edges, so it grants royal charters to guilds that swear fealty.</p>
+      <p>Guilds hold land by oath and keep it by iron.</p>
+      <ul class="lands" id="lands">
+        <li><button type="button" data-land="deep"><strong>Deep Marches</strong> <span>Guilds rule here if they can hold it. Everyone is flagged. The best resources in the realm.</span></button></li>
+        <li><button type="button" data-land="marches"><strong>Marches</strong> <span>Held by guilds under charter. Everyone is flagged. Keeps, sieges and rare resources.</span></button></li>
+        <li><button type="button" data-land="free"><strong>Free Lands</strong> <span>Lightly ruled. PvP only if you flag for it. Small hamlets beyond the towns.</span></button></li>
+        <li><button type="button" data-land="crown" aria-pressed="true"><strong>Crownlands</strong> <span>The Crown's own, never claimable. No PvP. Starter towns, markets and room for solo players.</span></button></li>
+      </ul>
+    </div>
+    <figure class="map">
+      <svg viewBox="0 0 800 860" role="img" aria-label="A hand-cut sketch of the realm. Crownlands sit in the south, Free Lands around them, Marches to the north and the Deep Marches at the far edge.">
+        <defs>
+          <filter id="cut" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7"/>
+            <feDisplacementMap in="SourceGraphic" scale="9"/>
+          </filter>
+          <pattern id="hatch-deep" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><rect width="3.4" height="7" fill="var(--bone)"/></pattern>
+          <pattern id="hatch-marches" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><rect width="2.2" height="9" fill="var(--bone)"/></pattern>
+          <pattern id="hatch-free" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(8)"><rect width="1.3" height="12" fill="var(--bone)"/></pattern>
+          <clipPath id="land"><path d="M96 170 C150 84 260 60 372 86 C486 34 612 62 692 148 C756 222 708 312 742 398 C778 494 712 566 692 646 C668 750 566 816 448 798 C340 830 214 800 158 712 C96 622 118 544 74 456 C34 366 58 248 96 170Z"/></clipPath>
+          <symbol id="peak" viewBox="0 0 40 30"><path d="M2 29 L20 2 L38 29 M20 2 L26 29 M20 2 L14 18" fill="none" stroke="currentColor" stroke-width="2.4"/></symbol>
+          <symbol id="keep" viewBox="0 0 30 34"><path d="M3 33 V12 H7 V16 H11 V12 H19 V16 H23 V12 H27 V33Z M10 12 V3 H14 V6 H16 V3 H20 V12Z" fill="currentColor"/></symbol>
+          <symbol id="hut" viewBox="0 0 24 20"><path d="M2 19 V10 L12 2 L22 10 V19Z" fill="currentColor"/></symbol>
+        </defs>
+        <g filter="url(#cut)">
+          <g clip-path="url(#land)">
+            <path class="tier" data-land="free" fill="url(#hatch-free)" d="M0 0 H800 V860 H0Z"/>
+            <path class="tier" data-land="marches" fill="url(#hatch-marches)" d="M0 0 H800 V430 C690 470 610 396 498 440 C390 482 300 412 200 452 C120 484 60 440 0 470Z"/>
+            <path class="tier" data-land="deep" fill="url(#hatch-deep)" d="M0 0 H800 V226 C700 262 618 196 512 236 C410 276 300 206 196 250 C120 282 60 240 0 266Z"/>
+            <path class="tier" data-land="crown" fill="var(--soot)" d="M250 620 C260 540 350 512 430 530 C520 500 620 548 612 640 C606 730 510 772 420 760 C330 776 244 708 250 620Z"/>
+            <path class="tier tier--crown" data-land="crown" fill="url(#hatch-free)" d="M250 620 C260 540 350 512 430 530 C520 500 620 548 612 640 C606 730 510 772 420 760 C330 776 244 708 250 620Z"/>
+          </g>
+          <path fill="none" stroke="var(--bone)" stroke-width="5" d="M96 170 C150 84 260 60 372 86 C486 34 612 62 692 148 C756 222 708 312 742 398 C778 494 712 566 692 646 C668 750 566 816 448 798 C340 830 214 800 158 712 C96 622 118 544 74 456 C34 366 58 248 96 170Z"/>
+          <path fill="none" stroke="var(--soot)" stroke-width="9" d="M0 226 M800 226 C700 262 618 196 512 236 C410 276 300 206 196 250 C120 282 60 240 0 266 M800 430 C690 470 610 396 498 440 C390 482 300 412 200 452 C120 484 60 440 0 470" clip-path="url(#land)"/>
+          <path fill="none" stroke="var(--soot)" stroke-width="10" d="M532 120 C500 240 588 300 520 410 C470 490 500 560 430 640 C402 690 420 750 448 798"/>
+          <g class="marks">
+            <use href="#peak" x="170" y="150" width="62" height="46"/><use href="#peak" x="238" y="122" width="74" height="55"/><use href="#peak" x="316" y="158" width="58" height="43"/>
+            <use href="#peak" x="572" y="120" width="70" height="52"/><use href="#peak" x="624" y="166" width="54" height="40"/>
+            <use href="#keep" x="440" y="136" width="34" height="38"/>
+            <use href="#keep" x="210" y="316" width="34" height="38"/><use href="#keep" x="420" y="330" width="34" height="38"/><use href="#keep" x="620" y="304" width="34" height="38"/>
+            <use href="#hut" x="172" y="536" width="24" height="20"/><use href="#hut" x="648" y="520" width="24" height="20"/><use href="#hut" x="196" y="666" width="24" height="20"/>
+          </g>
+        </g>
+        <g class="names">
+          <text x="400" y="222" text-anchor="middle">Deep Marches</text>
+          <text x="316" y="404" text-anchor="middle">Marches</text>
+          <text x="154" y="508">Free Lands</text>
+          <text x="430" y="648" text-anchor="middle" class="names__crown">Crownlands</text>
+        </g>
+      </svg>
+      <figcaption>A sketch of how the land is divided, not the real map.</figcaption>
+    </figure>
+  </section>
+  <section class="plain">
+    <h2>Land held by oath</h2>
+    <p>Guilds that swear fealty are granted a royal charter over wild land. There they raise keeps and fight for rare resources,. The throne itself is never up for grabs.</p>
+  </section>
+  <section class="plain">
+    <h2>A home of your own</h2>
+    <p>Houses are planned for after launch: buy one at a set plot and step through the door into your own space, with the finest shown in the world for everyone to see.</p>
+  </section>
+  <p class="page__note">Planned design, not playable yet. The map is a sketch of how the land is divided, not the real map.</p>
+</main>
+<footer>
+  <p>Ravenmarch: Oath and Iron is a working title. Made by DoomFrog.</p>
+</footer>
+<script src="main.js" defer></script>
+</body>
+</html>
