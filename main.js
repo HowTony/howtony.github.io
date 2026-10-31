@@ -83,52 +83,59 @@ if (ravenCanvas) {
     const ratio = Math.min(devicePixelRatio || 1, 2);
     width = box.width;
     height = box.height;
-    scale = Math.max(0.7, Math.min(width / 1400, 1.3));
+    scale = Math.max(0.65, Math.min(width / 1300, 1.4));
     ravenCanvas.width = width * ratio;
     ravenCanvas.height = height * ratio;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
   }
 
   function spawn(raven, anywhere) {
-    raven.size = 10 + Math.random() * 9;
+    raven.size = 12 + Math.random() * 11;
     raven.heading = Math.random() < 0.5 ? 1 : -1;
     raven.x = anywhere ? Math.random() * width : raven.heading > 0 ? -40 : width + 40;
-    raven.base = height * (0.12 + Math.random() * 0.34);
+    raven.base = height * (0.14 + Math.random() * 0.3);
     raven.speed = 26 + raven.size * 3 + Math.random() * 14;
     raven.drift = Math.random() * Math.PI * 2;
     raven.flap = Math.random() * Math.PI * 2;
     raven.glide = Math.random() * 3;
   }
 
+  function wing(size, side, lift) {
+    context.beginPath();
+    context.moveTo(side * size * 0.08, -size * 0.06);
+    context.quadraticCurveTo(side * size * 0.62, -size * (lift * 0.95 + 0.12), side * size * 1.34, -size * lift * 0.62);
+    context.quadraticCurveTo(side * size * 0.74, -size * (lift * 0.42 - 0.04), side * size * 0.1, size * 0.1);
+    context.fill();
+  }
+
   function draw(raven) {
     const y = raven.base + Math.sin(raven.drift) * 14;
     const size = raven.size * scale;
-    const gliding = raven.glide > 0;
-    const lift = gliding ? 0.32 : Math.sin(raven.flap) * 0.85;
+    const lift = raven.glide > 0 ? 0.3 : 0.15 + Math.sin(raven.flap) * 0.62;
     context.save();
     context.translate(raven.x, y);
     context.scale(raven.heading, 1);
-    context.fillStyle = "#0c0e13";
+    context.rotate(Math.sin(raven.drift * 1.3) * 0.08);
+    context.fillStyle = "#07080c";
+    wing(size, 1, lift);
+    wing(size, -1, lift);
     context.beginPath();
-    context.ellipse(0, 0, size * 0.62, size * 0.15, 0, 0, Math.PI * 2);
+    context.ellipse(0, 0, size * 0.36, size * 0.11, 0, 0, Math.PI * 2);
     context.fill();
     context.beginPath();
-    context.moveTo(size * 0.62, 0);
-    context.lineTo(size * 0.86, size * 0.05);
-    context.lineTo(size * 0.6, size * 0.09);
+    context.arc(size * 0.36, -size * 0.03, size * 0.09, 0, Math.PI * 2);
     context.fill();
     context.beginPath();
-    context.moveTo(-size * 0.5, 0);
-    context.lineTo(-size * 0.98, -size * 0.1);
-    context.lineTo(-size * 0.98, size * 0.12);
+    context.moveTo(size * 0.42, -size * 0.08);
+    context.lineTo(size * 0.6, -size * 0.01);
+    context.lineTo(size * 0.42, size * 0.02);
     context.fill();
-    for (const side of [1, -0.82]) {
-      context.beginPath();
-      context.moveTo(size * 0.2, 0);
-      context.quadraticCurveTo(size * 0.05, -size * lift * side * 0.7, -size * 0.45, -size * lift * side * 1.55 - size * 0.02);
-      context.quadraticCurveTo(-size * 0.28, -size * lift * side * 0.45, -size * 0.22, size * 0.04);
-      context.fill();
-    }
+    context.beginPath();
+    context.moveTo(-size * 0.28, -size * 0.07);
+    context.lineTo(-size * 0.62, -size * 0.02);
+    context.lineTo(-size * 0.6, size * 0.08);
+    context.lineTo(-size * 0.28, size * 0.08);
+    context.fill();
     context.restore();
   }
 
@@ -154,13 +161,23 @@ if (ravenCanvas) {
     requestAnimationFrame(frame);
   }
 
+  function fit() {
+    const unsized = width === 0;
+    resize();
+    if (unsized && width > 0) flock.forEach((raven) => spawn(raven, true));
+    if (calm && width > 0) {
+      context.clearRect(0, 0, width, height);
+      flock.forEach(draw);
+    }
+  }
+
   resize();
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 0; i < 8; i += 1) {
     const raven = { beats: 3 };
     spawn(raven, true);
     flock.push(raven);
   }
-  addEventListener("resize", resize);
+  new ResizeObserver(fit).observe(ravenCanvas);
 
   if (calm) {
     flock.forEach(draw);
