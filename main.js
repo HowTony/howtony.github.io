@@ -71,6 +71,7 @@ const ravensFront = document.getElementById("ravens-front");
 
 if (ravensBack && ravensFront) {
   const FRAMES = 8;
+  const LOOP = 7;
   const FLOCK = 7;
   const KEEP_X = 2130 / 2560;
   const KEEP_Y = 590 / 1439;
@@ -132,7 +133,7 @@ if (ravensBack && ravensFront) {
     const { context } = layers[near > 0 ? 1 : 0];
     const source = raven.glide > 0 ? glide : sheet;
     const cell = source === sheet ? sheet.naturalWidth / FRAMES : glide.naturalWidth;
-    const frame = source === sheet ? Math.floor(raven.flap) % FRAMES : 0;
+    const frame = source === sheet ? Math.floor(raven.flap) % LOOP : 0;
     const tall = source.naturalHeight / cell;
     context.save();
     context.translate(x, y);
