@@ -75,12 +75,17 @@ if (ravensBack && ravensFront) {
   const FLOCK = 7;
   const KEEP_X = 2130 / 2560;
   const KEEP_Y = 590 / 1439;
+  const SKY_LIMIT = 0.42;
+  const SCOUT_SPEED = 62;
   const layers = [ravensBack, ravensFront].map((canvas) => ({ canvas, context: canvas.getContext("2d") }));
   const plate = document.querySelector(".decree__plate");
   const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sheet = new Image();
   const glide = new Image();
   const flock = [];
+  const scouts = [];
+  let pointerX = 0;
+  let pointerY = 0;
   let centreX = 0;
   let centreY = 0;
   let unit = 1;
@@ -124,29 +129,66 @@ if (ravensBack && ravensFront) {
     };
   }
 
+  function sprite(raven, layer, x, y, size, alpha, facing) {
+    const { context } = layers[layer];
+    const source = raven.glide > 0 ? glide : sheet;
+    const cell = source === sheet ? sheet.naturalWidth / FRAMES : glide.naturalWidth;
+    const frame = source === sheet ? Math.floor(raven.flap) % LOOP : 0;
+    const tall = source.naturalHeight / cell;
+    const drawn = source === glide ? size * 1.5 : size;
+    context.save();
+    context.globalAlpha = alpha;
+    context.translate(x, y);
+    context.scale(facing, 1);
+    context.drawImage(source, frame * cell, 0, cell, source.naturalHeight, -drawn / 2, (-drawn * tall) / 2, drawn, drawn * tall);
+    context.restore();
+  }
+
   function draw(raven) {
     const near = Math.sin(raven.angle);
     const x = centreX + Math.cos(raven.angle) * raven.reachX * unit;
     const y = centreY + (near * raven.reachY + raven.rise + Math.sin(raven.sway) * 16) * unit;
     const size = raven.size * unit * (0.66 + near * 0.34);
     const facing = -Math.sin(raven.angle) >= 0 ? 1 : -1;
-    const { context } = layers[near > 0 ? 1 : 0];
-    const source = raven.glide > 0 ? glide : sheet;
-    const cell = source === sheet ? sheet.naturalWidth / FRAMES : glide.naturalWidth;
-    const frame = source === sheet ? Math.floor(raven.flap) % LOOP : 0;
-    const tall = source.naturalHeight / cell;
-    context.save();
-    context.globalAlpha = 0.58 + (near + 1) * 0.21;
-    context.translate(x, y);
-    context.scale(facing, 1);
-    const drawn = source === glide ? size * 1.5 : size;
-    context.drawImage(source, frame * cell, 0, cell, source.naturalHeight, -drawn / 2, (-drawn * tall) / 2, drawn, drawn * tall);
-    context.restore();
+    sprite(raven, near > 0 ? 1 : 0, x, y, size, 0.58 + (near + 1) * 0.21, facing);
+  }
+
+  function scout(index) {
+    return {
+      x: width * (0.2 + index * 0.18),
+      y: height * (0.14 + index * 0.05),
+      moveX: 0,
+      moveY: 0,
+      offset: Math.random() * Math.PI * 2,
+      facing: 1,
+      flap: Math.random() * FRAMES,
+      beats: 2 + Math.random() * 3,
+      glide: 0,
+      sway: Math.random() * Math.PI * 2,
+    };
+  }
+
+  function steer(raven, step) {
+    raven.sway += step * 0.5;
+    const goalX = pointerX + Math.cos(raven.sway + raven.offset) * width * 0.09;
+    const goalY = Math.min(pointerY, height * SKY_LIMIT) + Math.sin(raven.sway * 1.3 + raven.offset) * height * 0.05;
+    raven.moveX += (goalX - raven.x) * step * 0.14;
+    raven.moveY += (goalY - raven.y) * step * 0.14;
+    const speed = Math.hypot(raven.moveX, raven.moveY);
+    if (speed > SCOUT_SPEED) {
+      raven.moveX *= SCOUT_SPEED / speed;
+      raven.moveY *= SCOUT_SPEED / speed;
+    }
+    raven.moveX *= 1 - step * 0.35;
+    raven.moveY *= 1 - step * 0.35;
+    raven.x += raven.moveX * step;
+    raven.y += raven.moveY * step;
+    if (Math.abs(raven.moveX) > 3) raven.facing = raven.moveX > 0 ? 1 : -1;
   }
 
   function advance(raven, step) {
-    raven.angle += raven.speed * step;
-    raven.sway += step * 0.7;
+    if (raven.angle !== undefined) raven.angle += raven.speed * step;
+    if (raven.angle !== undefined) raven.sway += step * 0.7;
     if (raven.glide > 0) {
       raven.glide -= step;
       if (raven.glide <= 0) raven.beats = 2 + Math.random() * 3;
@@ -160,6 +202,7 @@ if (ravensBack && ravensFront) {
   function paint() {
     layers.forEach(({ context }) => context.clearRect(0, 0, width, height));
     flock.forEach(draw);
+    scouts.forEach((raven) => sprite(raven, 0, raven.x, raven.y, 15 + unit * 8, 0.55, raven.facing));
   }
 
   function frame(now) {
@@ -167,6 +210,10 @@ if (ravensBack && ravensFront) {
     const step = Math.min((now - last) / 1000, 0.05);
     last = now;
     flock.forEach((raven) => advance(raven, step));
+    scouts.forEach((raven) => {
+      advance(raven, step);
+      steer(raven, step);
+    });
     paint();
     requestAnimationFrame(frame);
   }
@@ -174,6 +221,16 @@ if (ravensBack && ravensFront) {
   function start() {
     for (let i = 0; i < FLOCK; i += 1) flock.push(hatch(i));
     measure();
+    if (!calm && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      pointerX = width * 0.4;
+      pointerY = height * 0.2;
+      for (let i = 0; i < 3; i += 1) scouts.push(scout(i));
+      document.querySelector(".decree").addEventListener("pointermove", (event) => {
+        const box = ravensBack.getBoundingClientRect();
+        pointerX = event.clientX - box.left;
+        pointerY = event.clientY - box.top;
+      });
+    }
     new ResizeObserver(() => {
       measure();
       paint();
