@@ -116,7 +116,7 @@ if (ravensBack && ravensFront) {
       reachX: 200 + Math.random() * 300,
       reachY: 60 + Math.random() * 90,
       rise: -80 + Math.random() * 150,
-      size: 46 + Math.random() * 18,
+      size: 32 + Math.random() * 12,
       flap: Math.random() * FRAMES,
       beats: 2 + Math.random() * 3,
       glide: 0,
@@ -136,6 +136,7 @@ if (ravensBack && ravensFront) {
     const frame = source === sheet ? Math.floor(raven.flap) % LOOP : 0;
     const tall = source.naturalHeight / cell;
     context.save();
+    context.globalAlpha = 0.72 + (near + 1) * 0.14;
     context.translate(x, y);
     context.scale(facing, 1);
     const drawn = source === glide ? size * 1.5 : size;
@@ -191,6 +192,6 @@ if (ravensBack && ravensFront) {
   }
 
   Promise.all([sheet, glide].map((image) => new Promise((resolve) => image.addEventListener("load", resolve, { once: true })))).then(start);
-  sheet.src = "assets/art/ravens/raven_sheet.webp";
-  glide.src = "assets/art/ravens/raven_glide.webp";
+  sheet.src = "assets/art/ravens/raven_sheet.webp?v=2";
+  glide.src = "assets/art/ravens/raven_glide.webp?v=2";
 }
