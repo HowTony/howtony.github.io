@@ -76,6 +76,7 @@ if (ravensBack && ravensFront) {
   const KEEP_X = 2130 / 2560;
   const KEEP_Y = 590 / 1439;
   const SKY_LIMIT = 0.42;
+  const FRAME_MS = 33;
   const SCOUT_SPEED = 62;
   const layers = [ravensBack, ravensFront].map((canvas) => ({ canvas, context: canvas.getContext("2d") }));
   const plate = document.querySelector(".decree__plate");
@@ -97,7 +98,7 @@ if (ravensBack && ravensFront) {
   function measure() {
     const box = plate.getBoundingClientRect();
     const hero = ravensBack.getBoundingClientRect();
-    const ratio = Math.min(devicePixelRatio || 1, 2);
+    const ratio = Math.min(devicePixelRatio || 1, 1.25);
     const shown = getComputedStyle(plate).objectPosition.split(" ").map(parseFloat);
     const fit = Math.max(box.width / 2560, box.height / 1439);
     const spareX = box.width - 2560 * fit;
@@ -207,7 +208,9 @@ if (ravensBack && ravensFront) {
 
   function frame(now) {
     if (!running) return;
-    const step = Math.min((now - last) / 1000, 0.05);
+    requestAnimationFrame(frame);
+    if (now - last < FRAME_MS) return;
+    const step = Math.min((now - last) / 1000, 0.1);
     last = now;
     flock.forEach((raven) => advance(raven, step));
     scouts.forEach((raven) => {
@@ -215,7 +218,6 @@ if (ravensBack && ravensFront) {
       steer(raven, step);
     });
     paint();
-    requestAnimationFrame(frame);
   }
 
   function start() {
@@ -226,10 +228,9 @@ if (ravensBack && ravensFront) {
       pointerY = height * 0.2;
       for (let i = 0; i < 3; i += 1) scouts.push(scout(i));
       document.querySelector(".decree").addEventListener("pointermove", (event) => {
-        const box = ravensBack.getBoundingClientRect();
-        pointerX = event.clientX - box.left;
-        pointerY = event.clientY - box.top;
-      });
+        pointerX = event.clientX;
+        pointerY = event.clientY + scrollY;
+      }, { passive: true });
     }
     new ResizeObserver(() => {
       measure();
