@@ -128,7 +128,7 @@ if (ravensBack && ravensFront) {
     const near = Math.sin(raven.angle);
     const x = centreX + Math.cos(raven.angle) * raven.reachX * unit;
     const y = centreY + (near * raven.reachY + raven.rise + Math.sin(raven.sway) * 16) * unit;
-    const size = raven.size * unit * (1.05 + near * 0.32);
+    const size = raven.size * unit * (0.66 + near * 0.34);
     const facing = -Math.sin(raven.angle) >= 0 ? 1 : -1;
     const { context } = layers[near > 0 ? 1 : 0];
     const source = raven.glide > 0 ? glide : sheet;
@@ -136,7 +136,7 @@ if (ravensBack && ravensFront) {
     const frame = source === sheet ? Math.floor(raven.flap) % LOOP : 0;
     const tall = source.naturalHeight / cell;
     context.save();
-    context.globalAlpha = 0.72 + (near + 1) * 0.14;
+    context.globalAlpha = 0.58 + (near + 1) * 0.21;
     context.translate(x, y);
     context.scale(facing, 1);
     const drawn = source === glide ? size * 1.5 : size;
